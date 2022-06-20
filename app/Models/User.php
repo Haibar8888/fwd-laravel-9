@@ -86,4 +86,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\ManagementAccess\RoleUser', 'user_id');
     }
+
+    public function doctor()
+    {
+        return $this->hasOne('App\Models\Operational\Doctor', 'user_id');
+    }
+
+    public function appointment()
+    {
+        return $this->hasMany('App\Models\Operational\Appointment', 'user_id');
+    }
 }
