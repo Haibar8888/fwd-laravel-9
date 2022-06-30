@@ -48,6 +48,6 @@ class Role extends Model
 
     public function permission_role()
     {
-        return $this->hasMany('App\Models\ManagementAccess\PemrissionRole', 'role_id');
+        return $this->hasMany('App\Models\ManagementAccess\PermissionRole', 'role_id');
     }
 }

@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Backsite\DashboardController;
+use App\Http\Controllers\Backsite\NewController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::resource('dashboard', DashboardController::class);
+Route::resource('dashboard', NewController::class);
 
 Route::get('/', function () {
     return view('welcome');
