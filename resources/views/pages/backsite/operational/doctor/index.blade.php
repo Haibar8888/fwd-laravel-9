@@ -73,6 +73,24 @@
                                                         <p>Please complete the input <code>required</code>, before you click the submit button.</p>
                                                     </div>
 
+                                                    <div class="form-group row {{ $errors->has('user_id') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">User Account <code style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <select name="user_id"
+                                                                    id="user_id"
+                                                                    class="form-control select2" required>
+                                                                    <option value="{{ '' }}" disabled selected>Choose</option>
+                                                                @foreach($user as $key => $user_item)
+                                                                    <option value="{{ $user_item->id }}">{{ $user_item->name }}</option>
+                                                                @endforeach
+                                                            </select>
+
+                                                            @if($errors->has('user_id'))
+                                                                <p style="font-style: bold; color: red;">{{ $errors->first('user_id') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
                                                     <div class="form-group row {{ $errors->has('specialist_id') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">Specialist <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
@@ -177,6 +195,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Date</th>
+                                                            <th>User Account</th>
                                                             <th>Specialist</th>
                                                             <th>Name</th>
                                                             <th>Fee</th>
@@ -188,6 +207,7 @@
                                                         @forelse($doctor as $key => $doctor_item)
                                                             <tr data-entry-id="{{ $doctor_item->id }}">
                                                                 <td>{{ isset($doctor_item->created_at) ? date("d/m/Y H:i:s",strtotime($doctor_item->created_at)) : '' }}</td>
+                                                                <td>{{ $doctor_item->user->name ?? '' }}</td>
                                                                 <td>{{ $doctor_item->specialist->name ?? '' }}</td>
                                                                 <td>{{ $doctor_item->name ?? '' }}</td>
                                                                 <td>{{ 'IDR '.number_format($doctor_item->fee) ?? '' }}</td>

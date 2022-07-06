@@ -53,6 +53,6 @@ class Appointment extends Model
 
     public function consultation()
     {
-        return $this->belongsTo('App\Models\MasteData\Consultation', 'consultation_id', 'id');
+        return $this->belongsTo('App\Models\MasterData\Consultation', 'consultation_id', 'id');
     }
 }

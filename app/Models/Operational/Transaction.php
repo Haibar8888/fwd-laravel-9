@@ -39,6 +39,6 @@ class Transaction extends Model
     // one to many
     public function appointment()
     {
-        return $this->belongsTo('App\Models\Operational\Appointment', 'appointment', 'id');
+        return $this->belongsTo('App\Models\Operational\Appointment', 'appointment_id', 'id');
     }
 }

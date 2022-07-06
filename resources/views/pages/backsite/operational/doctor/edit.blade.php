@@ -70,6 +70,24 @@
 
                                                     <h4 class="form-section"><i class="fa fa-edit"></i> Form Doctor</h4>
 
+                                                    <div class="form-group row {{ $errors->has('user_id') ? 'has-error' : '' }}">
+                                                        <label class="col-md-3 label-control">User Account <code style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <select name="user_id"
+                                                                    id="user_id"
+                                                                    class="form-control select2" required>
+                                                                    <option value="{{ '' }}" disabled selected>Choose</option>
+                                                                @foreach($user as $key => $user_item)
+                                                                    <option value="{{ $user_item->id }}" {{ $doctor->user_id == $user_item->id ? 'selected' : '' }}>{{ $user_item->name }}</option>
+                                                                @endforeach
+                                                            </select>
+
+                                                            @if($errors->has('user_id'))
+                                                                <p style="font-style: bold; color: red;">{{ $errors->first('user_id') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
                                                     <div class="form-group row {{ $errors->has('specialist_id') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">Specialist <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
