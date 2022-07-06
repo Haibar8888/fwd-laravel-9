@@ -14,7 +14,27 @@ class ConfigPaymentController extends Controller
      */
     public function index()
     {
-        //
+
+        $check_name = SalaryType::where('name','ILIKE','%'.$request->name.'%')->where('deleted_at', NULL)->first();
+
+        if(isset($check_name)){
+            $str = $check_name->name;
+            $pattern = '/'.$request->name.'/i';
+            $result_regex = preg_match_all($pattern, $str);
+
+            if($result_regex != 1){
+                dd('boleh update karena 0');
+            }else{
+                if($check_name['id'] != $salary_type['id']){
+                    dd('tidak boleh update karena regex 1');
+                }else{
+                    dd('boleh update karena id sama, walaupun regex 1');
+                }
+            }
+        }else{
+            dd('boleh update dong karena data nya tidak pernah ada');
+        }
+
     }
 
     /**
