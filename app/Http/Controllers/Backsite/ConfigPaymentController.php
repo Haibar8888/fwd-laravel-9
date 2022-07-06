@@ -3,10 +3,33 @@
 namespace App\Http\Controllers\Backsite;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+
+// use library here
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
+
+// request
+use App\Http\Requests\ConfigPayment\UpdateConfigPaymentRequest;
+
+// use everything here
+use Gate;
+use Auth;
+
+// use model here
+use App\Models\MasterData\ConfigPayment;
 
 class ConfigPaymentController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,27 +37,11 @@ class ConfigPaymentController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('config_payment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $check_name = SalaryType::where('name','ILIKE','%'.$request->name.'%')->where('deleted_at', NULL)->first();
+        $config_payment = ConfigPayment::all();
 
-        if(isset($check_name)){
-            $str = $check_name->name;
-            $pattern = '/'.$request->name.'/i';
-            $result_regex = preg_match_all($pattern, $str);
-
-            if($result_regex != 1){
-                dd('boleh update karena 0');
-            }else{
-                if($check_name['id'] != $salary_type['id']){
-                    dd('tidak boleh update karena regex 1');
-                }else{
-                    dd('boleh update karena id sama, walaupun regex 1');
-                }
-            }
-        }else{
-            dd('boleh update dong karena data nya tidak pernah ada');
-        }
-
+        return view('pages.backsite.master-data.config-payment.index', compact('config_payment'));
     }
 
     /**
@@ -44,7 +51,7 @@ class ConfigPaymentController extends Controller
      */
     public function create()
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -55,7 +62,7 @@ class ConfigPaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -66,7 +73,7 @@ class ConfigPaymentController extends Controller
      */
     public function show($id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -75,9 +82,11 @@ class ConfigPaymentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ConfigPayment $config_payment)
     {
-        //
+        abort_if(Gate::denies('config_payment_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return view('pages.backsite.master-data.config-payment.edit', compact('config_payment'));
     }
 
     /**
@@ -87,9 +96,21 @@ class ConfigPaymentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateConfigPaymentRequest $request, ConfigPayment $config_payment)
     {
-        //
+        // get all request from frontsite
+        $data = $request->all();
+
+        // re format before push to table
+        $data['fee'] = str_replace(',', '', $data['fee']);
+        $data['fee'] = str_replace('IDR ', '', $data['fee']);
+        $data['vat'] = str_replace(',', '', $data['vat']);
+
+        // update to database
+        $config_payment->update($data);
+
+        alert()->success('Success Message', 'Successfully updated config payment');
+        return redirect()->route('backsite.config_payment.index');
     }
 
     /**
@@ -100,6 +121,6 @@ class ConfigPaymentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return abort(404);
     }
 }
