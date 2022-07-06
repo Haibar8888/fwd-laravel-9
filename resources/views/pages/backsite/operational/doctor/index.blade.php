@@ -254,6 +254,7 @@
                                                     <tfoot>
                                                         <tr>
                                                             <th>Date</th>
+                                                            <th>User Account</th>
                                                             <th>Specialist</th>
                                                             <th>Name</th>
                                                             <th>Fee</th>
