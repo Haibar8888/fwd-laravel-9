@@ -3,10 +3,33 @@
 namespace App\Http\Controllers\Frontsite;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+
+// use library here
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\DB;
+
+// use everything here
+// use Gate;
+use Auth;
+
+// use model here
+use App\Models\User;
+
+// thirdparty package
 
 class RegisterController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +37,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.frontsite.success.signup-success');
     }
 
     /**
@@ -24,7 +47,7 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -35,7 +58,7 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -46,7 +69,7 @@ class RegisterController extends Controller
      */
     public function show($id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -57,7 +80,7 @@ class RegisterController extends Controller
      */
     public function edit($id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -69,7 +92,7 @@ class RegisterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -80,6 +103,6 @@ class RegisterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return abort(404);
     }
 }
