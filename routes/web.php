@@ -35,6 +35,7 @@ use App\Http\Controllers\Backsite\ReportTransactionController;
 
 Route::resource('/', LandingController::class);
 
+// frontsite
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     // appointment page
@@ -52,6 +53,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::resource('register_success', RegisterController::class);
 });
 
+// backsite
 Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['auth:sanctum', 'verified']], function () {
 
     // dashboard
