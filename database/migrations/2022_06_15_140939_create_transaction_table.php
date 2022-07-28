@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('transaction', function (Blueprint $table) {
             $table->id();
+            $table->string('transaction_code');
             $table->string('fee_doctor');
             $table->string('fee_specialist');
             $table->string('fee_hospital');

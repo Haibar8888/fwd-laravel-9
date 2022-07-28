@@ -47,6 +47,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::controller(PaymentController::class)->group(function() {
         Route::get('payment/success', 'success')->name('payment.success');
         Route::get('payment/appointment/{id}', 'payment')->name('payment.appointment');
+        Route::post('payment/callback', 'callback')->name('payment.callback');
     });
     Route::resource('payment', PaymentController::class);
 
