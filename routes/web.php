@@ -21,6 +21,7 @@ use App\Http\Controllers\Backsite\DoctorController;
 use App\Http\Controllers\Backsite\HospitalPatientController;
 use App\Http\Controllers\Backsite\ReportAppointmentController;
 use App\Http\Controllers\Backsite\ReportTransactionController;
+use App\Http\Controllers\Backsite\PrioritasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,6 +93,9 @@ Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['aut
 
     // report transaction
     Route::resource('transaction', ReportTransactionController::class);
+
+    // propritas
+    Route::resource('prioritas', PrioritasController::class);
 
 });
 

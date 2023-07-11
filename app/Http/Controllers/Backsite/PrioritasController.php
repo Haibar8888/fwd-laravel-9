@@ -5,6 +5,14 @@ namespace App\Http\Controllers\Backsite;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
+
+// models
+use App\Models\Operational\Prioritas;
+
+// request
+use App\Http\Requests\Prioritas\StorePrioritasRequest;
 class PrioritasController extends Controller
 {
     /**
@@ -20,7 +28,10 @@ class PrioritasController extends Controller
     public function index()
     {
         //
-        
+        // abort_if(Gate::denies('prioritas_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $prioritas = Prioritas::orderBy('created_at','desc')->get();
+
+        return view('pages.backsite.operational.prioritas.index',compact('prioritas'));
     }
 
     /**
@@ -39,9 +50,14 @@ class PrioritasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePrioritasRequest $request)
     {
         //
+        $prioritas = $request->all();
+        Prioritas::create($prioritas);
+
+        alert()->success('Success Message', 'Data berhasil ditambahkan');
+        return redirect()->route('backsite.prioritas.index');
     }
 
     /**

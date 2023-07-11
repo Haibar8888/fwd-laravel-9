@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 {{-- set title --}}
-@section('title', 'Doctor')
+@section('title', 'Prioritas')
 
 @section('content')
-
-<!-- BEGIN: Content-->
+    <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="content-wrapper">
@@ -28,12 +27,12 @@
             {{-- breadcumb --}}
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-                    <h3 class="content-header-title mb-0 d-inline-block">Doctor</h3>
+                    <h3 class="content-header-title mb-0 d-inline-block">Prioritas</h3>
                     <div class="row breadcrumbs-top d-inline-block">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('backsite.dashboard.index') }}">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Doctor</li>
+                                <li class="breadcrumb-item active">Prioritas</li>
                             </ol>
                         </div>
                     </div>
@@ -64,90 +63,19 @@
                                     <div class="card-content collapse hide">
                                         <div class="card-body card-dashboard">
 
-                                            <form class="form form-horizontal" action="{{ route('backsite.doctor.store') }}" method="POST" enctype="multipart/form-data">
-
+                                            <form class="form form-horizontal" action="{{ route('backsite.prioritas.store') }}" method="POST">
                                                 @csrf
-
                                                 <div class="form-body">
-                                                    <div class="form-section">
-                                                        <p>Please complete the input <code>required</code>, before you click the submit button.</p>
-                                                    </div>
-
-                                                    <div class="form-group row {{ $errors->has('user_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">User Account <code style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
-                                                            <select name="user_id"
-                                                                    id="user_id"
-                                                                    class="form-control select2" required>
-                                                                    <option value="{{ '' }}" disabled selected>Choose</option>
-                                                                @foreach($user as $key => $user_item)
-                                                                    <option value="{{ $user_item->id }}">{{ $user_item->name }}</option>
-                                                                @endforeach
-                                                            </select>
-
-                                                            @if($errors->has('user_id'))
-                                                                <p style="font-style: bold; color: red;">{{ $errors->first('user_id') }}</p>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row {{ $errors->has('specialist_id') ? 'has-error' : '' }}">
-                                                        <label class="col-md-3 label-control">Specialist <code style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
-                                                            <select name="specialist_id"
-                                                                    id="specialist_id"
-                                                                    class="form-control select2" required>
-                                                                    <option value="{{ '' }}" disabled selected>Choose</option>
-                                                                @foreach($specialist as $key => $specialist_item)
-                                                                    <option value="{{ $specialist_item->id }}">{{ $specialist_item->name }}</option>
-                                                                @endforeach
-                                                            </select>
-
-                                                            @if($errors->has('specialist_id'))
-                                                                <p style="font-style: bold; color: red;">{{ $errors->first('specialist_id') }}</p>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="name">Name <code style="color:red;">required</code></label>
+                                                        <label class="col-md-3 label-control" for="title">Name <code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
-                                                            <input type="text" id="name" name="name" class="form-control" placeholder="example john doe or jane doe" value="{{old('name')}}" autocomplete="off" required>
+                                                            <input type="text" id="title" name="title" class="form-control" placeholder="P1" value="{{old('title')}}" autocomplete="off" required>
 
-                                                            @if($errors->has('name'))
-                                                                <p style="font-style: bold; color: red;">{{ $errors->first('name') }}</p>
+                                                            @if($errors->has('title'))
+                                                                <p style="font-style: bold; color: red;">{{ $errors->first('title') }}</p>
                                                             @endif
                                                         </div>
                                                     </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="fee">Fee <code style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
-                                                            <input type="text" id="fee" name="fee" class="form-control" placeholder="example fee 10000" value="{{old('fee')}}" autocomplete="off" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'digitsOptional': 0, 'prefix': 'IDR ', 'placeholder': '0'" required>
-
-                                                            @if($errors->has('fee'))
-                                                                <p style="font-style: bold; color: red;">{{ $errors->first('fee') }}</p>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-md-3 label-control" for="photo">Photo <code style="color:red;">required</code></label>
-                                                        <div class="col-md-9 mx-auto">
-                                                            <div class="custom-file">
-                                                                <input type="file" accept="image/png, image/svg, image/jpeg" class="custom-file-input" id="photo" name="photo" required>
-                                                                <label class="custom-file-label" for="photo" aria-describedby="photo">Choose File</label>
-                                                            </div>
-
-                                                            <p class="text-muted"><small class="text-danger">Hanya dapat mengunggah 1 file</small><small> dan yang dapat digunakan JPEG, SVG, PNG & Maksimal ukuran file hanya 10 MegaBytes</small></p>
-
-                                                            @if($errors->has('photo'))
-                                                                <p style="font-style: bold; color: red;">{{ $errors->first('photo') }}</p>
-                                                            @endif
-
-                                                        </div>
-                                                    </div>
-
                                                 </div>
 
                                                 <div class="form-actions text-right">
@@ -156,7 +84,6 @@
                                                     </button>
                                                 </div>
                                             </form>
-
                                         </div>
                                     </div>
                                 </div>
@@ -176,7 +103,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title">Specialist List</h4>
+                                        <h4 class="card-title">Prioritas List</h4>
                                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                         <div class="heading-elements">
                                             <ul class="list-inline mb-0">
@@ -194,33 +121,22 @@
                                                 <table class="table table-striped table-bordered text-inputs-searching default-table">
                                                     <thead>
                                                         <tr>
-                                                            <th>Date</th>
-                                                            <th>User Account</th>
-                                                            <th>Specialist</th>
-                                                            <th>Name</th>
-                                                            <th>Fee</th>
-                                                            <th>Photo</th>
+                                                            <th>title</th>
                                                             <th style="text-align:center; width:150px;">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @forelse($doctor as $key => $doctor_item)
-                                                            <tr data-entry-id="{{ $doctor_item->id }}">
-                                                                <td>{{ isset($doctor_item->created_at) ? date("d/m/Y H:i:s",strtotime($doctor_item->created_at)) : '' }}</td>
-                                                                <td>{{ $doctor_item->user->name ?? '' }}</td>
-                                                                <td>{{ $doctor_item->specialist->name ?? '' }}</td>
-                                                                <td>{{ $doctor_item->name ?? '' }}</td>
-                                                                <td>{{ 'IDR '.number_format($doctor_item->fee) ?? '' }}</td>
-                                                                <td><a data-fancybox="gallery" data-src="{{ request()->getSchemeAndHttpHost().'/storage'.'/'.$doctor_item->photo }}" class="blue accent-4">Show</a></td>
+                                                        @forelse($prioritas as $data)
+                                                            <tr data-entry-id="{{ $data->id }}">
+                                                                <td>{{$data->title}}</td>
                                                                 <td class="text-center">
-
                                                                     <div class="btn-group mr-1 mb-1">
                                                                         <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
                                                                         <div class="dropdown-menu">
 
-                                                                            @can('doctor_show')
+                                                                            @can('prioritas_show')
                                                                                 <a href="#mymodal"
-                                                                                    data-remote="{{ route('backsite.doctor.show', $doctor_item->id) }}"
+                                                                                    data-remote="{{ route('backsite.doctor.show', $data->id) }}"
                                                                                     data-toggle="modal"
                                                                                     data-target="#mymodal"
                                                                                     data-title="Doctor Detail"
@@ -229,14 +145,14 @@
                                                                                 </a>
                                                                             @endcan
 
-                                                                            @can('doctor_edit')
-                                                                                <a class="dropdown-item" href="{{ route('backsite.doctor.edit', $doctor_item->id) }}">
+                                                                            @can('prioritas_edit')
+                                                                                <a class="dropdown-item" href="{{ route('backsite.doctor.edit', $data->id) }}">
                                                                                     Edit
                                                                                 </a>
                                                                             @endcan
 
-                                                                            @can('doctor_delete')
-                                                                                <form action="{{ route('backsite.doctor.destroy', $doctor_item->id) }}" method="POST" onsubmit="return confirm('Are you sure want to delete this data ?');">
+                                                                            @can('prioritas_delete')
+                                                                                <form action="{{ route('backsite.doctor.destroy', $data->id) }}" method="POST" onsubmit="return confirm('Are you sure want to delete this data ?');">
                                                                                     <input type="hidden" name="_method" value="DELETE">
                                                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                                                     <input type="submit" class="dropdown-item" value="Delete">
@@ -253,17 +169,12 @@
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
-                                                            <th>Date</th>
-                                                            <th>User Account</th>
-                                                            <th>Specialist</th>
-                                                            <th>Name</th>
-                                                            <th>Fee</th>
-                                                            <th>Photo</th>
-                                                            <th style="text-align:center; width:150px;">Action</th>
+                                                            <th>Title</th>
                                                         </tr>
                                                     </tfoot>
                                                 </table>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -276,7 +187,6 @@
         </div>
     </div>
 <!-- END: Content-->
-
 @endsection
 
 @push('after-style')
@@ -338,8 +248,14 @@
         Fancybox.bind('[data-fancybox="gallery"]', {
             infinite: false
         });
-    </script>
 
+        $(function() {
+            $('#title').keyup(function() {
+                this.value = this.value.toLocaleUpperCase();
+            });
+        });
+    </script>
+    {{-- message --}}
     <div class="modal fade" id="mymodal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
