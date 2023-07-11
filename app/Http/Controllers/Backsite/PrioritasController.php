@@ -13,6 +13,7 @@ use App\Models\Operational\Prioritas;
 
 // request
 use App\Http\Requests\Prioritas\StorePrioritasRequest;
+use App\Http\Requests\Prioritas\UpdatePrioritasRequest;
 class PrioritasController extends Controller
 {
     /**
@@ -77,9 +78,10 @@ class PrioritasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Prioritas $priorita)
     {
         //
+        return view('pages.backsite.operational.prioritas.edit',compact('priorita'));
     }
 
     /**
@@ -89,9 +91,14 @@ class PrioritasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePrioritasRequest $request, Prioritas $priorita)
     {
         //
+        $data = $request->all();
+        $priorita->update($data);
+
+        alert()->success('Success Message', 'Data berhasil diedit');
+        return redirect()->route('backsite.prioritas.index');
     }
 
     /**
@@ -100,8 +107,11 @@ class PrioritasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Prioritas $priorita)
     {
         //
+        $priorita->forceDelete();
+        alert()->success('Success Message', 'Data berhasil dihapus');
+        return back();
     }
 }

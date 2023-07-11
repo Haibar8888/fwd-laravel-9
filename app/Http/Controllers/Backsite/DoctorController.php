@@ -105,8 +105,8 @@ class DoctorController extends Controller
         // store to database
         $doctor = Doctor::create($data);
 
-        alert()->success('Success Message', 'Successfully added new doctor');
-        return redirect()->route('backsite.doctor.index');
+            alert()->success('Success Message', 'Successfully added new doctor');
+            return redirect()->route('backsite.doctor.index');
     }
 
     /**

@@ -97,7 +97,6 @@ class ConsultationController extends Controller
     public function edit(Consultation $consultation)
     {
         abort_if(Gate::denies('consultation_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         return view('pages.backsite.master-data.consultation.edit', compact('consultation'));
     }
 

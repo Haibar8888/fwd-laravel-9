@@ -145,19 +145,19 @@
                                                                                 </a>
                                                                             @endcan
 
-                                                                            @can('prioritas_edit')
-                                                                                <a class="dropdown-item" href="{{ route('backsite.doctor.edit', $data->id) }}">
+                                                                            {{-- @can('prioritas_edit') --}}
+                                                                                <a class="dropdown-item" href="{{ route('backsite.prioritas.edit', $data->id) }}">
                                                                                     Edit
                                                                                 </a>
-                                                                            @endcan
+                                                                            {{-- @endcan --}}
 
-                                                                            @can('prioritas_delete')
-                                                                                <form action="{{ route('backsite.doctor.destroy', $data->id) }}" method="POST" onsubmit="return confirm('Are you sure want to delete this data ?');">
+                                                                            {{-- @can('prioritas_delete') --}}
+                                                                                <form action="{{ route('backsite.prioritas.destroy', $data->id) }}" method="POST" onsubmit="return confirm('Are you sure want to delete this data ?');">
                                                                                     <input type="hidden" name="_method" value="DELETE">
                                                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                                                     <input type="submit" class="dropdown-item" value="Delete">
                                                                                 </form>
-                                                                            @endcan
+                                                                            {{-- @endcan --}}
 
                                                                         </div>
                                                                     </div>
@@ -251,6 +251,7 @@
 
         $(function() {
             $('#title').keyup(function() {
+
                 this.value = this.value.toLocaleUpperCase();
             });
         });
