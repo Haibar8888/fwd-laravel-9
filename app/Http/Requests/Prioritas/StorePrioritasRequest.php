@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Requests\User;
-
-use App\Models\User;
-use Gate;
+namespace App\Http\Requests\Prioritas;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
+
 use Symfony\Component\HttpFoundation\Response;
 
-class StoreUserRequest extends FormRequest
+class StorePrioritasRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,26 +18,19 @@ class StoreUserRequest extends FormRequest
     public function authorize()
     {
         abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function rules()
     {
         return [
-            'name' => [
+            'title' => [
                 'required', 'string', 'max:255',
-            ],
-            'email' => [
-                'required', 'email', 'unique:users', 'max:255',
-            ],
-            'password' => [
-                'min:8', 'string', 'max:255', 'mixedCase',
             ],
             // add validation for role this here
         ];
