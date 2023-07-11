@@ -15,9 +15,11 @@ use App\Http\Requests\Doctor\StoreDoctorRequest;
 use App\Http\Requests\Doctor\UpdateDoctorRequest;
 
 // use everything here
+// use Gate;
 use Gate;
 use Auth;
 use File;
+// use File;
 
 // use model here
 use App\Models\User;

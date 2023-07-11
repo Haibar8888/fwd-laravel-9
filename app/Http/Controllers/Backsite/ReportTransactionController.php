@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
 // use everything here
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Auth;
 
 // use model here
@@ -41,6 +41,7 @@ class ReportTransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         abort_if(Gate::denies('transaction_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');

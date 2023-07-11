@@ -21,8 +21,17 @@ class UserSeeder extends Seeder
         $user = [
             [
                 'name'           => 'Super Admin',
-                'email'          => 'admin@mail.com',
-                'password'       => Hash::make('Admin@12345'),
+                'email'          => 'admin@gmail.com',
+                'password'       => Hash::make('admin@12345'),
+                'remember_token' => null,
+                'created_at'     => date('Y-m-d H:i:s'),
+                'updated_at'     => date('Y-m-d H:i:s'),
+            ],
+
+             [
+                'name'           => 'galuh',
+                'email'          => 'galuh@gmail.com',
+                'password'       => Hash::make('galuh1234'),
                 'remember_token' => null,
                 'created_at'     => date('Y-m-d H:i:s'),
                 'updated_at'     => date('Y-m-d H:i:s'),
