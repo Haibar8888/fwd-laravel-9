@@ -90,6 +90,22 @@
                             </li>
                         @endcan
 
+                        {{-- @can('doctor_access') --}}
+                            <li class="{{ request()->is('backsite/pasien') || request()->is('backsite/pasien/*') || request()->is('backsite/*/pasien') || request()->is('backsite/*/pasien/*') ? 'active' : '' }} ">
+                                <a class="menu-item" href="{{ route('backsite.pasien.index') }}">
+                                    <i></i><span>Pasien</span>
+                                </a>
+                            </li>
+                        {{-- @endcan --}}
+
+                        {{-- @can('prioritas_access') --}}
+                            <li class="{{ request()->is('backsite/prioritas') || request()->is('backsite/prioritas/*') || request()->is('backsite/*/prioritas') || request()->is('backsite/*/prioritas/*') ? 'active' : '' }} ">
+                                <a class="menu-item" href="{{ route('backsite.prioritas.index') }}">
+                                    <i></i><span>Prioritas</span>
+                                </a>
+                            </li>
+                        {{-- @endcan --}}
+
                         {{-- @can('hospital_patient_access') --}}
                             <li class="{{ request()->is('backsite/hospital_patient') || request()->is('backsite/hospital_patient/*') || request()->is('backsite/*/hospital_patient') || request()->is('backsite/*/hospital_patient/*') ? 'active' : '' }} ">
                                 <a class="menu-item" href="{{ route('backsite.hospital_patient.index') }}">

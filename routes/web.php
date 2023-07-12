@@ -22,6 +22,7 @@ use App\Http\Controllers\Backsite\HospitalPatientController;
 use App\Http\Controllers\Backsite\ReportAppointmentController;
 use App\Http\Controllers\Backsite\ReportTransactionController;
 use App\Http\Controllers\Backsite\PrioritasController;
+use App\Http\Controllers\Backsite\PasienController;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,6 +97,9 @@ Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['aut
 
     // propritas
     Route::resource('prioritas', PrioritasController::class);
+
+    // pasien 
+    Route::resource('pasien',PasienController::class);
 
 });
 

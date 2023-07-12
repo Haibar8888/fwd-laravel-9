@@ -1,14 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Prioritas;
+namespace App\Http\Requests\Pasien;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\User;
-use Illuminate\Support\Facades\Gate;
 
-use Symfony\Component\HttpFoundation\Response;
-
-class StorePrioritasRequest extends FormRequest
+class StorePasienRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,8 +13,7 @@ class StorePrioritasRequest extends FormRequest
      */
     public function authorize()
     {
-        abort_if(Gate::denies('prioritas_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        return true;
+        return false;
     }
 
     /**
@@ -29,10 +24,18 @@ class StorePrioritasRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => [
+            //
+            'nama' => [
                 'required', 'string', 'max:255',
             ],
-            // add validation for role this here
+
+            'usia' => [
+                'required','integer',
+            ],
+            
+            'jk' => [
+                'required','string', 'max:255',
+            ],
         ];
     }
 }
