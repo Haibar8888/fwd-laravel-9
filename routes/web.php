@@ -23,6 +23,8 @@ use App\Http\Controllers\Backsite\ReportAppointmentController;
 use App\Http\Controllers\Backsite\ReportTransactionController;
 use App\Http\Controllers\Backsite\PrioritasController;
 use App\Http\Controllers\Backsite\PasienController;
+use App\Http\Controllers\Backsite\RadGroupReplayController;
+use App\Http\Controllers\Backsite\RadCheckController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,6 +102,12 @@ Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['aut
 
     // pasien 
     Route::resource('pasien',PasienController::class);
+
+    // radgroupreplay
+    Route::resource('group',RadGroupReplayController::class);
+
+    // radcheck
+    Route::resource('radcheck',RadCheckController::class);
 
 });
 
