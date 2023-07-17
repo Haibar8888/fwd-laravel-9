@@ -84,7 +84,18 @@
                                                         </div>
                                                     </div>
 
-                                                   <div class="form-group row {{ $errors->has('attribute') ? 'has-error' : '' }}">
+                                                    <div class="form-group row">
+                                                        <label class="col-md-3 label-control" for="attribute">attribute <code style="color:red;">required</code></label>
+                                                        <div class="col-md-9 mx-auto">
+                                                            <input type="text" id="attribute" name="attribute" class="form-control" placeholder="attribute" value="Mikrotik-Rate-Limit" autocomplete="off" required>
+
+                                                            @if($errors->has('attribute'))
+                                                                <p style="font-style: bold; color: red;">{{ $errors->first('attribute') }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                   {{-- <div class="form-group row {{ $errors->has('attribute') ? 'has-error' : '' }}">
                                                         <label class="col-md-3 label-control">Attribute<code style="color:red;">required</code></label>
                                                         <div class="col-md-9 mx-auto">
                                                             <select name="attribute"
@@ -98,7 +109,7 @@
                                                                 <p style="font-style: bold; color: red;">{{ $errors->first('attribute') }}</p>
                                                             @endif
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
 
                                                     <div class="form-group row">
                                                         <label class="col-md-3 label-control" for="op">Op <code style="color:red;">required</code></label>

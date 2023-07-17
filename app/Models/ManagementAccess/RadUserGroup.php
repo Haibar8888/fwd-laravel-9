@@ -12,7 +12,7 @@ class RadUserGroup extends Model
 
     use SoftDeletes;
 
-    protected $table = 'userinfo';
+    protected $table = 'radusergroup';
 
     protected $dates = [
         'created_at',

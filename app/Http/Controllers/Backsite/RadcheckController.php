@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 // model
 use App\Models\ManagementAccess\Radcheck;
 use App\Models\ManagementAccess\RadGroupReplay;
+use App\Models\ManagementAccess\RadUserGroup;
 
 class RadcheckController extends Controller
 {
@@ -20,7 +21,7 @@ class RadcheckController extends Controller
     public function index()
     {
         //
-        $datas = Radcheck::orderBy('created_at', 'asc')->get();
+        $datas = Radcheck::orderBy('created_at', 'desc')->get();
         $groups = RadGroupReplay::all();
         
         return view('pages.backsite.operational.radcheck.index',compact('datas', 'groups',));
@@ -53,6 +54,12 @@ class RadcheckController extends Controller
             'attribute' => $request->attribute,
             'op' => $request->op,
             'value' => $hashed
+        ]);
+
+        RadUserGroup::create([
+            'username' => $request->username,
+            'groupname' => $request->groupname,
+            'priority' => 0,
         ]);
 
         alert()->success('Success Message', 'Data User berhasil ditambahkan');

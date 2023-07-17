@@ -8,7 +8,6 @@
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="content-wrapper">
-
             {{-- error --}}
             @if ($errors->any())
                 <div class="alert bg-danger alert-dismissible mb-2" role="alert">
@@ -107,7 +106,6 @@
                                                                     @foreach($groups as $group)
                                                                         <option value="{{$group->groupname}}">{{$group->groupname}}</option>
                                                                     @endforeach
-                                                                    
                                                             </select>
                                                             @if($errors->has('groupname'))
                                                                 <p style="font-style: bold; color: red;">{{ $errors->first('groupname') }}</p>
